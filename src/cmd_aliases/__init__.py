@@ -1,1 +1,1 @@
-from aliased_group import AliasedGroup
+from .aliased_group import AliasedGroup, AliasConfig
