@@ -1,8 +1,7 @@
 import click
-import cmd_aliases
+from cmd_aliases import AliasedGroup, AliasConfig
 
-AliasedGroup = cmd_aliases.AliasedGroup()
-AliasedGroup.add_alias("welcome", "Hello World!")
+AliasConfig.add_alias("helloworld", "welcome")
 
 
 @click.command(cls=AliasedGroup)
