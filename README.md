@@ -2,16 +2,32 @@
 cli-aliases is a simple implemention to set aliases for your Click CLI. 
 
 # Installation
+## Dependencies
+- Click (>=8.1.8)
+
 Install the package by entering `pip install cli-aliases` in your terminal.
 
-# Usage
-See the `examples.py` file for a demonstration of how this package is used.
+# Usage: a simple example
+```
+import click
+from cmd_aliases import AliasedGroup, AliasConfig
 
-# MIT License Disclosure
-Copyright 2025 Jeff K Wang
+AliasConfig.add_alias("helloworld", "welcome")  # set a single alias entry in the form '(command, alias)'
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+@click.command(cls=AliasedGroup) # make sure to use the class, not an instance of it
+def cli():
+    pass
 
-THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
+
+@cli.command()
+def HelloWorld():
+    click.echo("Hello World!")
+
+
+if __name__ == "__main__":
+    cli()
+```
+
+# TODO
+- Add multiple alias comprehension

@@ -13,6 +13,10 @@ class AliasedGroup(click.Group):
     """
 
     def get_command(self, ctx, cmd_name):
+        """Retrieves command associated with Click Group object. If
+        command name is the full name, it executes the command as normal.
+        If command name is the alias, it finds the actual command name and
+        executes it as normal."""
         # Step one: builtin commands as normal
         rv = click.Group.get_command(self, ctx, cmd_name)
         if rv is not None:
@@ -25,6 +29,8 @@ class AliasedGroup(click.Group):
             return click.Group.get_command(self, ctx, actual_cmd)
 
     def resolve_command(self, ctx, args):
+        """Retrieves command associated with Click Group object, if the
+        supplied name doesn't match a command."""
         # always return the command's name, not the alias
         _, cmd, args = super().resolve_command(ctx, args)
         return cmd.name, cmd, args
